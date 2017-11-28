@@ -26,6 +26,8 @@
 		E083112A1FCA24BA00452117 /* addChore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08311291FCA24BA00452117 /* addChore.swift */; };
 		E083112C1FCBCB4A00452117 /* calEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E083112B1FCBCB4A00452117 /* calEvent.swift */; };
 		E083112E1FCBD24700452117 /* grocViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E083112D1FCBD24700452117 /* grocViewController2.swift */; };
+		E0EC35771FCCA8BD00609811 /* linkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC35761FCCA8BD00609811 /* linkedList.swift */; };
+		E0EC35791FCCAD4600609811 /* roommate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC35781FCCAD4600609811 /* roommate.swift */; };
 		ED0FA0ADF24BC464DCDCF926 /* Pods_ourSpace1_2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C67BE9736C05D6B2449E49 /* Pods_ourSpace1_2Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +80,8 @@
 		E08311291FCA24BA00452117 /* addChore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addChore.swift; sourceTree = "<group>"; };
 		E083112B1FCBCB4A00452117 /* calEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = calEvent.swift; sourceTree = "<group>"; };
 		E083112D1FCBD24700452117 /* grocViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = grocViewController2.swift; sourceTree = "<group>"; };
+		E0EC35761FCCA8BD00609811 /* linkedList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = linkedList.swift; sourceTree = "<group>"; };
+		E0EC35781FCCAD4600609811 /* roommate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = roommate.swift; sourceTree = "<group>"; };
 		FF318CD2E004B173152251F3 /* Pods_ourSpace1_2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ourSpace1_2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -158,6 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				78E32DEE1FB9779D0055A207 /* AppDelegate.swift */,
+				E0EC35761FCCA8BD00609811 /* linkedList.swift */,
+				E0EC35781FCCAD4600609811 /* roommate.swift */,
 				78E32DF01FB9779D0055A207 /* HomeViewController.swift */,
 				E08311231FCA173300452117 /* calendarViewController.swift */,
 				E083112B1FCBCB4A00452117 /* calEvent.swift */,
@@ -497,12 +503,14 @@
 				782B07941FBA102700BCEDCC /* ChoresViewController.swift in Sources */,
 				68DD22EE1FC2630800281CC8 /* SignUpViewController.swift in Sources */,
 				E083112E1FCBD24700452117 /* grocViewController2.swift in Sources */,
+				E0EC35791FCCAD4600609811 /* roommate.swift in Sources */,
 				E083112C1FCBCB4A00452117 /* calEvent.swift in Sources */,
 				78E32DF11FB9779D0055A207 /* HomeViewController.swift in Sources */,
 				78E32DEF1FB9779D0055A207 /* AppDelegate.swift in Sources */,
 				E08311261FCA178000452117 /* addCalendarItem.swift in Sources */,
 				E083112A1FCA24BA00452117 /* addChore.swift in Sources */,
 				E08311281FCA235000452117 /* chore.swift in Sources */,
+				E0EC35771FCCA8BD00609811 /* linkedList.swift in Sources */,
 				E08311241FCA173300452117 /* calendarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

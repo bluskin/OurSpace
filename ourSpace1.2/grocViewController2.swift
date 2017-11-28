@@ -12,16 +12,27 @@ import UIKit
 var groceries = [String]()
 class grocViewController2: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak var groceryList: UITableView!
-  
-    @IBOutlet weak var newGroc: UITextField!
     
-    @IBAction func addGroc(_ sender: AnyObject) {
-        groceries.append(newGroc.text!)
-        //newGroc.text = ""
+    @IBOutlet weak var groceryTable: UITableView!
+    @IBOutlet weak var newItem: UITextField!
+
+    @IBAction func addItem(_ sender: AnyObject) {
+        if(newItem.text! != ""){
+            groceries.append(newItem.text!)
+            groceryTable.reloadData()
+            newItem.text = ""
+        }
+    }
+    
+    func setupTableView() {
+        groceryTable.dataSource = self
+        groceryTable.delegate = self
+        groceryTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
 
     }
     
@@ -38,6 +49,13 @@ class grocViewController2: UIViewController, UITableViewDataSource, UITableViewD
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete{
+            groceries.remove(at: indexPath.row)
+            groceryTable.reloadData()
+        }
     }
     
 

@@ -292,8 +292,7 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="groceryViewButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NRI-mZ-tRO"/>
-                                    <segue destination="IOY-c6-ghp" kind="show" id="oVG-uf-Iul"/>
+                                    <segue destination="MTf-NR-Rkq" kind="show" id="fyg-d1-NQG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -308,44 +307,44 @@
             <point key="canvasLocation" x="-79.200000000000003" y="137.18140929535232"/>
         </scene>
         <!--Groc View Controller2-->
-        <scene sceneID="6cs-nR-wmS">
+        <scene sceneID="12c-gO-DNd">
             <objects>
-                <viewController id="IOY-c6-ghp" customClass="grocViewController2" customModule="ourSpace1_2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="MTf-NR-Rkq" customClass="grocViewController2" customModule="ourSpace1_2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="arR-hf-ymv"/>
-                        <viewControllerLayoutGuide type="bottom" id="aJs-sx-YbP"/>
+                        <viewControllerLayoutGuide type="top" id="Pmy-5B-LMN"/>
+                        <viewControllerLayoutGuide type="bottom" id="qEh-AH-3Dh"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="teg-mk-9Xc">
+                    <view key="view" contentMode="scaleToFill" id="aBg-X9-QK1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Vu-NJ-XTs">
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mjH-ZQ-vnC">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Grocery List" id="Sne-be-HFv">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="R9W-nw-3HS">
+                                    <navigationItem title="Grocery List" id="8hF-Hq-hl5">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="0eL-sm-KVd">
                                             <connections>
-                                                <segue destination="BYZ-38-t0r" kind="show" id="abG-Nj-rvV"/>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="UhI-zY-uIF"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Add Item" id="u3a-w9-KiJ">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="1jP-AV-w8t">
                                             <connections>
-                                                <action selector="addGroc:" destination="IOY-c6-ghp" id="Ux9-TP-xjv"/>
+                                                <action selector="addItem:" destination="MTf-NR-Rkq" id="Oey-fd-shF"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yva-He-I8J">
-                                <rect key="frame" x="41" y="101" width="298" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r7d-mF-nl5">
+                                <rect key="frame" x="49" y="102" width="276" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h4h-qL-aVN">
-                                <rect key="frame" x="0.0" y="162" width="375" height="497"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2IK-W2-ZRS">
+                                <rect key="frame" x="0.0" y="151" width="375" height="516"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -353,13 +352,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="groceryList" destination="h4h-qL-aVN" id="NKQ-kA-Huv"/>
-                        <outlet property="newGroc" destination="Yva-He-I8J" id="x7r-Ze-DNn"/>
+                        <outlet property="groceryTable" destination="2IK-W2-ZRS" id="I7U-ce-5ni"/>
+                        <outlet property="newItem" destination="r7d-mF-nl5" id="YmU-ab-lTo"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZjF-vd-hbv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UfI-ge-8T3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1013.6" y="-284.70764617691157"/>
+            <point key="canvasLocation" x="1013.6" y="-289.20539730134936"/>
         </scene>
         <!--ChoresView-->
         <scene sceneID="Hvi-Lu-1R5">
@@ -451,6 +450,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="LA7-Uz-Gtg" id="wTK-o9-Jid"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Frequency" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cSM-RP-1Qu">
                                 <rect key="frame" x="73" y="237" width="228" height="30"/>
@@ -475,6 +477,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <pickerView hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gBe-RT-Bc8">
+                                <rect key="frame" x="73" y="328" width="228" height="141"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="LA7-Uz-Gtg" id="a65-yj-zLv"/>
+                                    <outlet property="delegate" destination="LA7-Uz-Gtg" id="Z2i-L2-ngo"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -482,6 +492,7 @@
                         <outlet property="describe" destination="iyc-8Q-3ef" id="sg7-JA-HMM"/>
                         <outlet property="frequency" destination="cSM-RP-1Qu" id="Cfq-fN-eTh"/>
                         <outlet property="name" destination="apl-2F-SOt" id="MRw-gA-aNl"/>
+                        <outlet property="roomieDrop" destination="gBe-RT-Bc8" id="5Le-nE-z74"/>
                         <outlet property="whoChore" destination="cls-lC-c58" id="1ua-nk-SCK"/>
                     </connections>
                 </viewController>
@@ -491,7 +502,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="abG-Nj-rvV"/>
-        <segue reference="lhB-lP-94C"/>
+        <segue reference="UhI-zY-uIF"/>
+        <segue reference="jsw-NH-04p"/>
     </inferredMetricsTieBreakers>
 </document>
