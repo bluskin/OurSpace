@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import FirebaseDatabase
+import Firebase
 
 var groceries = [String]()
 class grocViewController2: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -15,10 +17,16 @@ class grocViewController2: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBOutlet weak var groceryTable: UITableView!
     @IBOutlet weak var newItem: UITextField!
+    var ref: DatabaseReference!
 
     @IBAction func addItem(_ sender: AnyObject) {
         if(newItem.text! != ""){
             groceries.append(newItem.text!)
+            let userID = Auth.auth().currentUser?.uid
+            let groceryItem = ["host": userID,
+                               "item": newItem.text!
+            ]
+            self.ref.child("groceries").childByAutoId().setValue(groceryItem)
             groceryTable.reloadData()
             newItem.text = ""
         }
@@ -33,7 +41,7 @@ class grocViewController2: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-
+        ref = Database.database().reference()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{

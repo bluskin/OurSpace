@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 var chores = [chore]()
 
 class ChoresViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -17,6 +19,7 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var choreTable: UITableView!
     
+    var ref: DatabaseReference!
     
     func setupTableView() {
         choreTable.dataSource = self
@@ -57,7 +60,8 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         setupTableView()
         choreTable.reloadData()
-        
+        ref = Database.database().reference()
+
         print(chores.count)
         for item in chores{
             print(" Chore name: \(item.name).  Responsible: \(item.whoTurn)")

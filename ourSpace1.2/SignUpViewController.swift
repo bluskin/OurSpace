@@ -78,7 +78,6 @@ class SignUpViewController: UIViewController {
                         //self.showMessagePrompt(error.localizedDescription)
                         return
                     }
-                    [self .performSegue(withIdentifier: "test", sender: self)]
                 }
             }
         }

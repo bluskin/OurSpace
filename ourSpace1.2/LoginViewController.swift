@@ -54,7 +54,6 @@ class LoginViewController: UIViewController {
                        // self.showMessagePrompt(error.localizedDescription)
                         return
                     }
-                    [self.performSegue(withIdentifier: "test2", sender: self)]
                 }
             }
         }    }
