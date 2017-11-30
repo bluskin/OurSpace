@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 var chores = [chore]()
 
 class ChoresViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -43,6 +45,7 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var choreTable: UITableView!
     
+    var ref: DatabaseReference!
     
     func setupTableView() {
         choreTable.dataSource = self
@@ -86,7 +89,6 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
         setupTableView()
         warningText.backgroundColor = UIColor.clear
         choreTable.reloadData()
-
     }
     //for deleting items
 //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -109,7 +111,7 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
         let complete = UITableViewRowAction(style: .normal, title: "Complete", handler: {ACTION, indexPath in self.completedFunctionality(path: indexPath)
         })
         
-        let delete = UITableViewRowAction(style: .normal, title: "Delete", handler: {ACTION, indexPath in print("delected task")
+        let delete = UITableViewRowAction(style: .normal, title: "Delete", handler: {ACTION, indexPath in print("deleted task")
         self.deleteFunctionality(path: indexPath)})
         delete.backgroundColor = UIColor.red
         return [delete,complete]

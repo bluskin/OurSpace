@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+import Firebase
+import FirebaseDatabase
+
 class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
@@ -20,13 +23,20 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var describe: UITextField!
     @IBOutlet weak var roomieDrop: UIPickerView!
-   
+    var ref: DatabaseReference!
+
     
     @IBAction func addChore(_ sender: AnyObject) {
         
         let nextChore = chore(name:name.text!, description:describe.text!, frequency:frequency.text!, whoTurn:whoChore.text!)
         if(name.text! != "" || frequency.text! != "" || whoChore.text! != "" || describe.text! != ""){
             chores.append(nextChore)
+            let chore = [ "name": nextChore.name,
+                          "description": nextChore.description,
+                          "frequency": nextChore.frequency,
+                          "turn": nextChore.whoTurn
+            ]
+            ref.child("chores").childByAutoId().setValue(chore)
         }
     }
 
@@ -85,6 +95,8 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         }
     
         // Do any additional setup after loading the view, typically from a nib.
+        ref = Database.database().reference()
+
     }
     
     override func didReceiveMemoryWarning() {
