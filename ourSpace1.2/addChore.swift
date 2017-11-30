@@ -41,36 +41,59 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
  
-    let list = allRoomates.roomArray
+    var list = [" "]
+    
+    let freqOptions = [" ","daily","weekly", "bi-weekly","monthly"]
     
     
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int{
-        return 1
+        return 2
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return list.count
+        if(component == 0)
+        {
+            return list.count;
+        }
+        else
+        {
+            return freqOptions.count;
+        }
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?{
          self.view.endEditing(true)
-        return list[row]
+        if(component == 0){
+            return list[row]
+        }else{
+            return freqOptions[row]
+        }
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
-        whoChore.text = list[row]
+        if(component == 0){
+            whoChore.text = list[row]
+        }else{
+            frequency.text = freqOptions[row]
+        }
+        
         roomieDrop.isHidden = true
     }
     func textFieldDidBeginEditing(_ textField: UITextField){
         if (textField == self.whoChore){
             roomieDrop.isHidden = false
+        }else if (textField == self.frequency){
+            roomieDrop.isHidden = false
         }
-        
     }
     
    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        for item in allRoomates.roomArray{
+            list.append(item)
+        }
+    
         // Do any additional setup after loading the view, typically from a nib.
         ref = Database.database().reference()
 

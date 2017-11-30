@@ -392,6 +392,43 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2cJ-8M-3bd">
+                                <rect key="frame" x="16" y="269" width="343" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVU-Qp-BcA">
+                                        <rect key="frame" x="71" y="89" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Yes"/>
+                                        <connections>
+                                            <action selector="yesButton:" destination="QXi-ww-Da3" eventType="touchUpInside" id="LAb-JL-MK5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VC6-Ov-6Bv">
+                                        <rect key="frame" x="234" y="89" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="No"/>
+                                        <connections>
+                                            <action selector="noButton:" destination="QXi-ww-Da3" eventType="touchUpInside" id="2a1-wf-VtG"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KqN-Pa-Uht">
+                                        <rect key="frame" x="51" y="19" width="240" height="62"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Nothing going on">
+                                                <attributes>
+                                                    <font key="NSFont" size="18" name="HelveticaNeue-Thin"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.8961374889" green="0.92738089800000001" blue="1" alpha="0.74654858732876717" colorSpace="calibratedRGB"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FJy-a7-Wzg">
                                 <rect key="frame" x="289" y="28" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -405,12 +442,14 @@
                     </view>
                     <connections>
                         <outlet property="choreTable" destination="fWh-b3-jA1" id="Sei-qb-Qfr"/>
+                        <outlet property="warningText" destination="KqN-Pa-Uht" id="u7B-Q3-kHZ"/>
+                        <outlet property="warningView" destination="2cJ-8M-3bd" id="4lZ-Fr-hJ7"/>
                         <segue destination="BYZ-38-t0r" kind="showDetail" identifier="Chores2HomeSegue" id="2YD-A1-MKY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mRA-yZ-tLY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1013.6" y="518.59070464767615"/>
+            <point key="canvasLocation" x="1013.6" y="517.6911544227886"/>
         </scene>
         <!--Add Chore-->
         <scene sceneID="zfW-Om-M0r">
@@ -460,6 +499,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="LA7-Uz-Gtg" id="IRt-c7-C5B"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bMd-nX-aSw">
                                 <rect key="frame" x="172" y="424" width="30" height="30"/>
@@ -478,7 +520,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <pickerView hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gBe-RT-Bc8">
-                                <rect key="frame" x="73" y="328" width="228" height="141"/>
+                                <rect key="frame" x="73" y="451" width="228" height="141"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="LA7-Uz-Gtg" id="a65-yj-zLv"/>
@@ -502,7 +544,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="UhI-zY-uIF"/>
+        <segue reference="2YD-A1-MKY"/>
         <segue reference="jsw-NH-04p"/>
     </inferredMetricsTieBreakers>
 </document>
