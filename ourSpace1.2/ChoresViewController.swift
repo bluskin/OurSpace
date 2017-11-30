@@ -11,8 +11,34 @@ var chores = [chore]()
 
 class ChoresViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var warningView: UIView!
+    @IBOutlet weak var warningText: UITextView!
     
-   // let defaults:UserDefaults = UserDefaults.standard
+    
+    @IBAction func yesButton(_ sender: AnyObject) {
+        //itemDeleted = true
+        if(taskIdentifer == "delete"){
+        chores.remove(at: deleteIndex)
+        }
+        else{
+            let currentPerson = chores[completeIndex].whoTurn
+            let nextPerson = allRoomates.nextRoomMate(a: currentPerson )
+            chores[completeIndex].whoTurn = nextPerson
+            choreTable.reloadData()
+            
+        }
+        choreTable.reloadData()
+        warningView.isHidden = true
+    }
+    @IBAction func noButton(_ sender: AnyObject) {
+        warningView.isHidden = true
+    }
+    var itemDeleted = false
+    var choreCompleted = false
+    var deleteIndex = 0
+    var completeIndex = 0
+    var taskIdentifer = "delete"
+
 
     
     @IBOutlet weak var choreTable: UITableView!
@@ -43,6 +69,8 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
     @IBAction func backButton(_ sender: UIButton) {
         super.viewDidLoad()
         self.performSegue(withIdentifier: "Chores2HomeSegue", sender: self)
+        
+        //view.addSubview(setUpDeleteWarning())
     }
 
     
@@ -56,21 +84,61 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
     }
     override func viewDidLoad() {
         setupTableView()
+        warningText.backgroundColor = UIColor.clear
         choreTable.reloadData()
+
+    }
+    //for deleting items
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == UITableViewCellEditingStyle.delete{
+//            warningView.isHidden = false;
+//            warningText.text = "Are you sure you want to delete this item?"
+//            
+//            //print("made it into editting style")
+//           
+//            deleteIndex = indexPath.row
+//            if(itemDeleted){
+//                chores.remove(at: indexPath.row)
+//                choreTable.reloadData()
+//            }
+//            print("made it to end of delete")
+//            itemDeleted = false
+//        }
+//    }
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let complete = UITableViewRowAction(style: .normal, title: "Complete", handler: {ACTION, indexPath in self.completedFunctionality(path: indexPath)
+        })
         
-        print(chores.count)
-        for item in chores{
-            print(" Chore name: \(item.name).  Responsible: \(item.whoTurn)")
-        }
+        let delete = UITableViewRowAction(style: .normal, title: "Delete", handler: {ACTION, indexPath in print("delected task")
+        self.deleteFunctionality(path: indexPath)})
+        delete.backgroundColor = UIColor.red
+        return [delete,complete]
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete{
-            chores.remove(at: indexPath.row)
-            choreTable.reloadData()
-        }
+    func deleteFunctionality(path: IndexPath){
+                taskIdentifer = "delete"
+                warningView.isHidden = false;
+                warningText.text = "Are you sure you want to delete this item?"
+        
+                deleteIndex = path.row
+                if(itemDeleted){
+                        chores.remove(at: path.row)
+                        choreTable.reloadData()
+                    }
+            print( "was item delected? \(itemDeleted)")
+                    itemDeleted = false
+                
     }
-    
+    func completedFunctionality(path: IndexPath){
+        taskIdentifer = "complete"
+        warningView.isHidden = false;
+        warningText.text = "Are you sure you completed this chore?"
+        completeIndex = path.row
+
+        print("complete index is \(completeIndex)")
+        choreCompleted = false
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
