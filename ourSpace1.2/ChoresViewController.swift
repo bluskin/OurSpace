@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+
 var chores = [chore]()
 
 class ChoresViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -16,7 +17,7 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var warningView: UIView!
     @IBOutlet weak var warningText: UITextView!
     
-    
+
     @IBAction func yesButton(_ sender: AnyObject) {
         //itemDeleted = true
         if(taskIdentifer == "delete"){
@@ -47,6 +48,7 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
     
     var ref: DatabaseReference!
     
+    //initialize the tableview
     func setupTableView() {
         choreTable.dataSource = self
         choreTable.delegate = self
@@ -90,23 +92,7 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
         warningText.backgroundColor = UIColor.clear
         choreTable.reloadData()
     }
-    //for deleting items
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == UITableViewCellEditingStyle.delete{
-//            warningView.isHidden = false;
-//            warningText.text = "Are you sure you want to delete this item?"
-//            
-//            //print("made it into editting style")
-//           
-//            deleteIndex = indexPath.row
-//            if(itemDeleted){
-//                chores.remove(at: indexPath.row)
-//                choreTable.reloadData()
-//            }
-//            print("made it to end of delete")
-//            itemDeleted = false
-//        }
-//    }
+
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let complete = UITableViewRowAction(style: .normal, title: "Complete", handler: {ACTION, indexPath in self.completedFunctionality(path: indexPath)
         })
@@ -117,6 +103,7 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
         return [delete,complete]
     }
     
+    //set the delete index, delete done in the "yes" button
     func deleteFunctionality(path: IndexPath){
                 taskIdentifer = "delete"
                 warningView.isHidden = false;
@@ -131,6 +118,7 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
                     itemDeleted = false
                 
     }
+    //set the complete index, complete function done in the "yes" button
     func completedFunctionality(path: IndexPath){
         taskIdentifer = "complete"
         warningView.isHidden = false;

@@ -8,10 +8,8 @@
 
 import Foundation
 
-//class calEvent{
-//    var name: String
-//    var date: Date
-//    var year: Int
-//    var month: Int
-//    var date: Int
-//}
+struct calEvent{
+    var name: String
+    var date: Date
+    var roommate:String
+}

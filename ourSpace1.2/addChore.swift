@@ -29,6 +29,7 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBAction func addChore(_ sender: AnyObject) {
         
         let nextChore = chore(name:name.text!, description:describe.text!, frequency:frequency.text!, whoTurn:whoChore.text!)
+        
         if(name.text! != "" || frequency.text! != "" || whoChore.text! != "" || describe.text! != ""){
             chores.append(nextChore)
             let chore = [ "name": nextChore.name,
@@ -103,4 +104,5 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 }

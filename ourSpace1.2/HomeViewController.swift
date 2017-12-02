@@ -32,11 +32,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         allRoomates.initialize(allRoomMate: ["Claire", "Nathan" , "David", "Ben"])
-        for index in 0...(allRoomates.roomArray.count-1){
-            let c = allRoomates.currentRoomMate(index: index)
-            let n = allRoomates.nextRoomMate(a: c)
-            print("Current: \(c)  Next: \(n)")
-        }
+
         // Do any additional setup after loading the view, typically from a nib.
     }
 
