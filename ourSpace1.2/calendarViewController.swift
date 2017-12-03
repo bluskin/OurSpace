@@ -22,9 +22,18 @@ class calendarViewController: UIViewController, UITableViewDelegate, UITableView
         // update data here
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
        cell.textLabel?.text = events[indexPath.row].name
-        cell.detailTextLabel?.text = events[indexPath.row].date.description
+    
+    
+        let date = events[indexPath.row].date
+        let calendar = Calendar.current
+        
+        let year = calendar.component(.year, from: date)
+         let month = calendar.component(.month, from: date)
+         let day = calendar.component(.day, from: date)
+        let weekDay = calendar.component(.weekday, from: date)
+         cell.detailTextLabel?.text = " Year: \(year) Month: \(month) Day: \(day) Weekday: \(weekDay)"
         return cell
         
     }
@@ -36,6 +45,27 @@ class calendarViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     override func viewDidAppear(_ animated: Bool) {
+        events.sort { (event1, event2) -> Bool in
+            
+            let calendar = Calendar.current
+            let weekDay1 = calendar.component(.weekday, from: event1.date)
+            let weekDay2 = calendar.component(.weekday, from: event2.date)
+            let startHour1 = calendar.component(.hour, from: event1.date)
+            let startHour2 = calendar.component(.hour, from: event2.date)
+            let startMinute1 = calendar.component(.minute, from: event1.date)
+            let startMinute2 = calendar.component(.minute, from: event2.date)
+            if(weekDay1 == weekDay2){
+                if(startHour1 == startHour2){
+                    return startMinute1 < startMinute2
+                }else{
+                    return startHour1 < startHour2
+                }
+            }else{
+            
+            return (weekDay1<weekDay2)
+        }
+        
+    }
         roommateCalendar.reloadData()
     }
     

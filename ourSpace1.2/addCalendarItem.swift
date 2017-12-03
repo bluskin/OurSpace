@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 class addCalendarItem: UIViewController {
+    let weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
     
     var newDate: Date? = nil
     
@@ -23,7 +25,7 @@ class addCalendarItem: UIViewController {
     }
     @IBAction func addItem(_ sender: AnyObject) {
         if(newDate != nil){
-        let nextEvent = calEvent(name: eventName.text!, date: newDate!, roommate: roommateName.text!)
+        let nextEvent = calEvent(name: eventName.text!, weakDay: <#String#>, weakNum: <#Int#>, date: newDate!, roommate: roommateName.text!)
         events.append(nextEvent)
         print("Event title \(nextEvent.name) Event date \(nextEvent.date.description) ")
         
@@ -41,7 +43,7 @@ class addCalendarItem: UIViewController {
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
         toolbar.setItems([doneButton], animated: false)
         dateField.inputAccessoryView = toolbar
-        
+        datePicker.datePickerMode = .time
         //date picker and text field
         dateField.inputView = datePicker
     }
@@ -51,8 +53,9 @@ class addCalendarItem: UIViewController {
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .short
         
+        
+        
         dateField.text = dateFormatter.string(from: datePicker.date)
-        //dismiss datePicker
         newDate = datePicker.date
         self.view.endEditing(true)
         

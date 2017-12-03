@@ -27,6 +27,7 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
             let currentPerson = chores[completeIndex].whoTurn
             let nextPerson = allRoomates.nextRoomMate(a: currentPerson )
             chores[completeIndex].whoTurn = nextPerson
+            chores[completeIndex].startDate = Date()
             choreTable.reloadData()
             
         }
