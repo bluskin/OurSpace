@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="T5n-tK-Ef8">
             <objects>
-                <viewController restorationIdentifier="LoginViewController" storyboardIdentifier="LoginViewController" id="rg9-Li-FO7" customClass="LoginViewController" customModule="ourSpace1_2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rg9-Li-FO7" customClass="LoginViewController" customModule="ourSpace1_2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Lf8-41-GKg"/>
                         <viewControllerLayoutGuide type="bottom" id="qOx-WE-nXj"/>
@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y9h-rU-3B0">
-                                <rect key="frame" x="51" y="318" width="272" height="30"/>
+                                <rect key="frame" x="51" y="318.5" width="272" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -34,7 +34,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TLE-ap-Oml">
-                                <rect key="frame" x="51" y="378" width="272" height="30"/>
+                                <rect key="frame" x="51.5" y="378.5" width="272" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -49,7 +49,6 @@
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="login:" destination="rg9-Li-FO7" eventType="touchUpInside" id="d7e-yF-ruS"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="test2" id="BhK-Dg-fQG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CJO-z1-NlP">
@@ -98,7 +97,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qZN-pE-etm">
-                                <rect key="frame" x="45" y="122" width="272" height="30"/>
+                                <rect key="frame" x="45" y="163" width="272" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -110,7 +109,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nhp-dq-aVl">
-                                <rect key="frame" x="45" y="192" width="272" height="30"/>
+                                <rect key="frame" x="45" y="233" width="272" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -121,7 +120,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Re-enter Password" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="36W-ug-Zuu" userLabel="Second Password">
-                                <rect key="frame" x="45" y="230" width="272" height="30"/>
+                                <rect key="frame" x="45" y="271" width="272" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -133,27 +132,56 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mrh-3z-lKL">
-                                <rect key="frame" x="160" y="268" width="55" height="30"/>
+                                <rect key="frame" x="160" y="309" width="55" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
                                     <action selector="signUp:" destination="LKt-kr-BUz" eventType="touchUpInside" id="ogX-WR-r0O"/>
-                                    <segue destination="rg9-Li-FO7" kind="show" identifier="test" id="EHd-29-sYR"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ns-VJ-DIH">
-                                <rect key="frame" x="16" y="337" width="343" height="21"/>
+                                <rect key="frame" x="16" y="378" width="343" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="First Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jEq-3a-iB6">
+                                <rect key="frame" x="45" y="102" width="97" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="changedFirstName:" destination="LKt-kr-BUz" eventType="editingDidBegin" id="KtA-gc-cbZ"/>
+                                    <action selector="changedFirstName:" destination="LKt-kr-BUz" eventType="touchUpInside" id="ndw-k4-gmK"/>
+                                    <action selector="firstNameEntered:" destination="LKt-kr-BUz" eventType="editingDidEnd" id="sGf-yN-VO8"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Last Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="20t-c4-2dH">
+                                <rect key="frame" x="220" y="102" width="97" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="changedLastName:" destination="LKt-kr-BUz" eventType="editingDidBegin" id="6db-Lv-nIn"/>
+                                    <action selector="changedLastName:" destination="LKt-kr-BUz" eventType="touchUpInside" id="qt2-n9-fN5"/>
+                                    <action selector="lastNameEntered:" destination="LKt-kr-BUz" eventType="editingDidEnd" id="ckc-au-cmg"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="20t-c4-2dH" firstAttribute="top" secondItem="5ku-dN-nwV" secondAttribute="bottom" constant="82" id="4th-K4-XXQ"/>
+                            <constraint firstItem="jEq-3a-iB6" firstAttribute="leading" secondItem="zQc-tk-RP9" secondAttribute="leadingMargin" constant="29" id="gLa-tq-vh3"/>
+                            <constraint firstItem="jEq-3a-iB6" firstAttribute="top" secondItem="5ku-dN-nwV" secondAttribute="bottom" constant="82" id="hPF-d0-KYi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="20t-c4-2dH" secondAttribute="trailing" constant="42" id="rCQ-HF-c2F"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="emailField" destination="qZN-pE-etm" id="cMJ-YP-44r"/>
                         <outlet property="equalLabel" destination="9ns-VJ-DIH" id="BkL-fp-7VO"/>
+                        <outlet property="firstName" destination="jEq-3a-iB6" id="9T4-Xf-Phi"/>
+                        <outlet property="lastName" destination="20t-c4-2dH" id="TKy-2s-0wl"/>
                         <outlet property="passwordField" destination="Nhp-dq-aVl" id="qH3-Qx-REl"/>
                         <outlet property="secondPassword" destination="36W-ug-Zuu" id="HtQ-HV-XuP"/>
                     </connections>
@@ -577,7 +605,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="2YD-A1-MKY"/>
-        <segue reference="jsw-NH-04p"/>
+        <segue reference="UhI-zY-uIF"/>
+        <segue reference="lhB-lP-94C"/>
     </inferredMetricsTieBreakers>
 </document>

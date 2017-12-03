@@ -54,13 +54,17 @@ class LoginViewController: UIViewController {
                        // self.showMessagePrompt(error.localizedDescription)
                         return
                     }
+                    else{
+                        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                        let secondView = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController")
+                        self.present(secondView, animated: true, completion: nil)
+
+                    }
                 }
             }
-        }    }
-    
-    @IBAction func signUp(_ sender: Any) {
-        [self.performSegue(withIdentifier: "SignUpViewController", sender: self)]
+        }
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

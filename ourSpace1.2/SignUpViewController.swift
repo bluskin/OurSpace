@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 class SignUpViewController: UIViewController {
     
@@ -16,13 +17,20 @@ class SignUpViewController: UIViewController {
     
     @IBOutlet weak var equalLabel: UILabel!
     
+    @IBOutlet weak var firstName: UITextField!
+    @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var secondPassword: UITextField!
+    var ref: DatabaseReference!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        ref = Database.database().reference()
+
         // Do any additional setup after loading the view.
         equalLabel.text = ""
+        firstName.text = "First Name"
+        lastName.text = "Last Name"
     }
     
     @IBAction func editingEmail(_ sender: Any) {
@@ -36,7 +44,28 @@ class SignUpViewController: UIViewController {
             emailField.text = "Email";
         }
     }
+    @IBAction func changedFirstName(_ sender: Any) {
+        print(firstName.text!)
+        if firstName.text == "First Name"{
+            firstName.text = ""
+        }
+    }
+    @IBAction func firstNameEntered(_ sender: Any) {
+        if firstName.text == ""{
+            firstName.text = "First Name"
+        }
+    }
+    @IBAction func changedLastName(_ sender: Any) {
+        if lastName.text == "Last Name"{
+            lastName.text = ""
+        }
+    }
     
+    @IBAction func lastNameEntered(_ sender: Any) {
+        if lastName.text == ""{
+            lastName.text = "Last Name"
+        }
+    }
     @IBAction func editingPassword(_ sender: Any) {
         if passwordField.text == "Password"{
             passwordField.text = "";
@@ -74,9 +103,21 @@ class SignUpViewController: UIViewController {
             if let password = passwordField.text{
                 Auth.auth().createUser(withEmail: email, password: password){ ( user, error) in
                     if let error = error {
-                        print(error.localizedDescription)
+                        self.equalLabel.text = error.localizedDescription
                         //self.showMessagePrompt(error.localizedDescription)
                         return
+                    }
+                    else{
+                        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                        let secondView = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController")
+                        let userID = Auth.auth().currentUser?.uid
+                        let name = self.firstName.text! + " " + self.lastName.text!
+                        let user = ["host": userID,
+                                           "name": name
+                                           
+                        ]
+                        self.ref.child("users").childByAutoId().setValue(user)
+                        self.present(secondView, animated: true, completion: nil)
                     }
                 }
             }
