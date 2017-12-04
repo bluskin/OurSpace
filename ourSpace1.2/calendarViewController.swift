@@ -34,15 +34,16 @@ class calendarViewController: UIViewController, UITableViewDelegate, UITableView
     
         dateFormatter.timeStyle = .short
         
-        
+        let fullMinutes = events[indexPath.row].duration
+        let hours = (fullMinutes / 60)
+        let minutes = (fullMinutes % 60)
         
         let timeDisplay = dateFormatter.string(from: date)
         
-        let hour = calendar.component(.hour, from: date)
-        let minute = calendar.component(.minute, from: date)
+      
 
         let weekDay = events[indexPath.row].weekDay
-         cell.detailTextLabel?.text = "\(weekDay) at \(timeDisplay)"
+         cell.detailTextLabel?.text = "\(weekDay) at \(timeDisplay)  duration: \(hours) hours \(minutes) minutes "
         return cell
         
     }

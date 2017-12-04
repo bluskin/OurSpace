@@ -101,7 +101,7 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         return 2
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if(component == 0)
+        if(component == 1)
         {
             return list.count;
         }
@@ -113,14 +113,14 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?{
          self.view.endEditing(true)
-        if(component == 0){
+        if(component == 1){
             return list[row]
         }else{
             return freqOptions[row]
         }
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
-        if(component == 0){
+        if(component == 1){
             whoChore.text = list[row]
         }else{
             frequency.text = freqOptions[row]
