@@ -11,6 +11,7 @@ import UIKit
 
 import Firebase
 import FirebaseDatabase
+import UserNotifications
 
 class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -30,6 +31,10 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         
 
         var nextChore = chore(name:name.text!, description:describe.text!, frequency:0, whoTurn:whoChore.text!, startDate: Date(), ID: "")
+        
+        print (whoChore.text!)
+        
+    generateNotification()
         
         if(name.text! != "" || frequency.text! != "" || whoChore.text! != "" || describe.text! != ""){
             if frequency.text == "daily"{
@@ -55,12 +60,53 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
             ref.child("chores").child(key).setValue(chore)
             chores.append(nextChore)
         }
+        
+        
     }
 
  
     var list = [" "]
     
     let freqOptions = [" ","daily","weekly", "bi-weekly","monthly"]
+    
+    
+    
+    
+    func generateNotification(){
+        let content = UNMutableNotificationContent()
+        content.title = whoChore.text! + " has to " + name.text!
+        content.body = describe.text!
+        content.subtitle = "do it!"
+        content.badge = 1
+        
+        var time = 5
+        if (frequency.text! == "daily"){
+            //time = 86400
+            time = 5
+            print ("HERE1")
+        }
+        if (frequency.text! == "weekly"){
+            time = 604800
+            print("HERE2")
+        }
+        if (frequency.text! == "bi-weekly"){
+            time  = 302400
+            print ("HERE3)")
+        }
+        if (frequency.text! == "monthly"){
+            time = 2419200
+            print ("HERE4")
+        }
+        
+  
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(time), repeats: false)
+        let request = UNNotificationRequest(identifier: "any", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        print ("helllllo")
+    }
+
+    
     
     
     
