@@ -22,9 +22,26 @@ class calendarViewController: UIViewController, UITableViewDelegate, UITableView
         // update data here
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-       cell.textLabel?.text = events[indexPath.row].name
-        cell.detailTextLabel?.text = events[indexPath.row].date.description
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+       cell.textLabel?.text = "\(events[indexPath.row].roommate): \(events[indexPath.row].name)"
+        
+    
+        let date = events[indexPath.row].date
+        let calendar = Calendar.current
+        
+        let dateFormatter = DateFormatter()
+    
+        dateFormatter.timeStyle = .short
+        
+        
+        
+        let timeDisplay = dateFormatter.string(from: date)
+        
+        let hour = calendar.component(.hour, from: date)
+        let minute = calendar.component(.minute, from: date)
+
+        let weekDay = events[indexPath.row].weekDay
+         cell.detailTextLabel?.text = "\(weekDay) at \(timeDisplay)"
         return cell
         
     }
@@ -36,18 +53,41 @@ class calendarViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     override func viewDidAppear(_ animated: Bool) {
+        events.sort { (event1, event2) -> Bool in
+            
+            let calendar = Calendar.current
+           
+            let startHour1 = calendar.component(.hour, from: event1.date)
+            let startHour2 = calendar.component(.hour, from: event2.date)
+            let startMinute1 = calendar.component(.minute, from: event1.date)
+            let startMinute2 = calendar.component(.minute, from: event2.date)
+            if(event1.weakNum == event2.weakNum){
+                if(startHour1 == startHour2){
+                    return startMinute1 < startMinute2
+                }else{
+                    return startHour1 < startHour2
+                }
+            }else{
+            
+            return (event1.weakNum < event2.weakNum)
+        }
+        
+    }
         roommateCalendar.reloadData()
+    }
+    
+    //for deleting from favorites list
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete{
+            events.remove(at: indexPath.row)
+            roommateCalendar.reloadData()
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         roommateCalendar.reloadData()
-        print("back in calendar view controller")
-        print("event count is \(events.count)")
-        for item in events{
-            print(" Name: \(item.name)  Roommate: \(item.roommate) ")
-        }
         // Do any additional setup after loading the view, typically from a nib.
     }
     

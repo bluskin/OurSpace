@@ -13,5 +13,6 @@ struct chore {
     var description: String
     var frequency: Int
     var whoTurn: String
+    var startDate: Date
     var ID: String
 }

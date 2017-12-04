@@ -27,6 +27,7 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
             let currentPerson = chores[completeIndex].whoTurn
             let nextPerson = allRoomates.nextRoomMate(a: currentPerson )
             chores[completeIndex].whoTurn = nextPerson
+            chores[completeIndex].startDate = Date()
             choreTable.reloadData()
             
         }
@@ -97,7 +98,7 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
         let complete = UITableViewRowAction(style: .normal, title: "Complete", handler: {ACTION, indexPath in self.completedFunctionality(path: indexPath)
         })
         
-        let delete = UITableViewRowAction(style: .normal, title: "Delete", handler: {ACTION, indexPath in print("deleted task")
+        let delete = UITableViewRowAction(style: .normal, title: "Delete", handler: {ACTION, indexPath in
         self.deleteFunctionality(path: indexPath)})
         delete.backgroundColor = UIColor.red
         return [delete,complete]
@@ -114,7 +115,6 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
                         chores.remove(at: path.row)
                         choreTable.reloadData()
                     }
-            print( "was item delected? \(itemDeleted)")
                     itemDeleted = false
                 
     }
@@ -124,8 +124,6 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
         warningView.isHidden = false;
         warningText.text = "Are you sure you completed this chore?"
         completeIndex = path.row
-
-        print("complete index is \(completeIndex)")
         choreCompleted = false
     }
 

@@ -10,6 +10,10 @@ import Foundation
 
 struct calEvent{
     var name: String
+    var weekDay: String
+    var weakNum: Int
+//    var hour: Int
+//    var min: Int
     var date: Date
     var roommate:String
 }
