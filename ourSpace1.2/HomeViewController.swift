@@ -122,8 +122,9 @@ class HomeViewController: UIViewController {
                     let weekNum = test["weekNum"]
                     let interval = test["date"]
                     let roommate = test["roommate"]
+                    let duration = test["duration"]
                     let date = Date(timeIntervalSince1970: interval as! TimeInterval)
-                    let newEvent = calEvent(name: name as! String, weekDay: weekDay as! String, weakNum: weekNum as! Int, duration: 4, date: date, roommate: roommate as! String, id: id)
+                    let newEvent = calEvent(name: name as! String, weekDay: weekDay as! String, weakNum: weekNum as! Int, duration: duration as! Int, date: date, roommate: roommate as! String, id: id)
                     events.append(newEvent)
                 }
             }
