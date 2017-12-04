@@ -76,34 +76,28 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         let content = UNMutableNotificationContent()
         content.title = whoChore.text! + " has to " + name.text!
         content.body = describe.text!
-        content.subtitle = "do it!"
+        content.subtitle = "Please complete your chore!"
         content.badge = 1
         
         var time = 5
         if (frequency.text! == "daily"){
-            //time = 86400
-            time = 5
-            print ("HERE1")
+            time = 86400
         }
         if (frequency.text! == "weekly"){
             time = 604800
-            print("HERE2")
         }
         if (frequency.text! == "bi-weekly"){
             time  = 302400
-            print ("HERE3)")
+            
         }
         if (frequency.text! == "monthly"){
             time = 2419200
-            print ("HERE4")
+            
         }
-        
-  
-        
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(time), repeats: false)
         let request = UNNotificationRequest(identifier: "any", content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        print ("helllllo")
+
     }
 
     
