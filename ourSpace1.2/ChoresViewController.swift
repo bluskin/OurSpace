@@ -39,21 +39,23 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
         }
         else{
             let currentPerson = chores[completeIndex].whoTurn
-            let nextPerson = allRoomates.nextRoomMate(a: currentPerson )
-            chores[completeIndex].whoTurn = nextPerson
-            chores[completeIndex].startDate = Date()
-            let changingChore = chores[completeIndex]
-            let id = changingChore.ID
-            let interval =  changingChore.startDate.timeIntervalSince1970
-            let chore = [ "name": changingChore.name,
+                if currentPerson == currentUser{
+                    let nextPerson = allRoomates.nextRoomMate(a: currentPerson )
+                    chores[completeIndex].whoTurn = nextPerson
+                    chores[completeIndex].startDate = Date()
+                    let changingChore = chores[completeIndex]
+                    let id = changingChore.ID
+                    let interval =  changingChore.startDate.timeIntervalSince1970
+                    let chore = [ "name": changingChore.name,
                           "description": changingChore.description,
                           "frequency": changingChore.frequency,
                           "turn": changingChore.whoTurn,
                           "startDate": interval
-                ] as [String : Any]
+                        ] as [String : Any]
             //let childUpdates = ["/chores/\(id)": chore]
-            ref.child("chores/\(id)").updateChildValues(["turn": nextPerson, "startDate": interval])
-        }
+                    ref.child("chores/\(id)").updateChildValues(["turn": nextPerson, "startDate": interval])
+                }
+            }
         choreTable.reloadData()
         warningView.isHidden = true
     }

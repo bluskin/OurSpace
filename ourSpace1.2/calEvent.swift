@@ -12,6 +12,7 @@ struct calEvent{
     var name: String
     var weekDay: String
     var weakNum: Int
+    var duration: Int
 //    var hour: Int
 //    var min: Int
     var date: Date

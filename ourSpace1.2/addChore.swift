@@ -33,7 +33,10 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         var nextChore = chore(name:name.text!, description:describe.text!, frequency:frequency.text!, whoTurn:whoChore.text!, startDate: Date(), ID: "")
         
         let interval =  nextChore.startDate.timeIntervalSince1970
-    generateNotification()
+        
+        
+        
+        generateNotification()
         
         if(name.text! != "" || frequency.text! != "" || whoChore.text! != "" || describe.text! != ""){
             let chore = [ "name": nextChore.name,
@@ -60,37 +63,41 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     func generateNotification(){
+        
+        
+        if (whoChore.text == currentUser){
+
+        
         let content = UNMutableNotificationContent()
         content.title = whoChore.text! + " has to " + name.text!
         content.body = describe.text!
-        content.subtitle = "do it!"
+        content.subtitle = "Please complete your chore!"
         content.badge = 1
         
         var time = 5
         if (frequency.text! == "daily"){
+            time = 30
             //time = 86400
-            time = 5
-            print ("HERE1")
         }
+            
         if (frequency.text! == "weekly"){
             time = 604800
-            print("HERE2")
         }
         if (frequency.text! == "bi-weekly"){
             time  = 302400
-            print ("HERE3)")
+            
         }
         if (frequency.text! == "monthly"){
             time = 2419200
-            print ("HERE4")
+            
         }
-        
-  
-        
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(time), repeats: false)
         let request = UNNotificationRequest(identifier: "any", content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-        print ("helllllo")
+            
+            print ("NOTFICIATION TRIGGERED")
+        }
+
     }
 
     
@@ -101,7 +108,7 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         return 2
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if(component == 0)
+        if(component == 1)
         {
             return list.count;
         }
@@ -113,14 +120,14 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?{
          self.view.endEditing(true)
-        if(component == 0){
+        if(component == 1){
             return list[row]
         }else{
             return freqOptions[row]
         }
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
-        if(component == 0){
+        if(component == 1){
             whoChore.text = list[row]
         }else{
             frequency.text = freqOptions[row]
