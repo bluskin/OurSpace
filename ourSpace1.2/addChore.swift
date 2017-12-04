@@ -76,8 +76,7 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         
         var time = 5
         if (frequency.text! == "daily"){
-            time = 30
-            //time = 86400
+            time = 86400
         }
             
         if (frequency.text! == "weekly"){
