@@ -10,7 +10,7 @@ import Foundation
 
 struct calEvent{
     var name: String
-    var weakDay: String
+    var weekDay: String
     var weakNum: Int
 //    var hour: Int
 //    var min: Int
