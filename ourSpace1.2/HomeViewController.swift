@@ -30,15 +30,17 @@ class HomeViewController: UIViewController {
     }
     func retrieveChores(completion: @escaping (Bool) -> ()){
         ref.child("chores").observeSingleEvent(of: .value, with: {(snapshot) in
-            let choresDict = snapshot.value as! [String: AnyObject]
+            if let choresDict = snapshot.value as? [String: AnyObject]{
             for (id, test) in choresDict{
                 print(test)
                 let name = test["name"]!!
                 let description = test["description"]!!
                 let frequency = test["frequency"]!!
                 let turn = test["turn"]!!
-                let newChore = chore(name: name as! String, description: description as! String, frequency: frequency as! Int, whoTurn: turn as! String, ID: id)
+                let date = test["date"]!!
+                let newChore = chore(name: name as! String, description: description as! String, frequency: frequency as! Int, whoTurn: turn as! String, startDate: date as! Date, ID: id)
                 chores.append(newChore)
+            }
             }
             completion(true)
         })

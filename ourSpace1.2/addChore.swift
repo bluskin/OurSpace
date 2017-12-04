@@ -29,7 +29,7 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBAction func addChore(_ sender: AnyObject) {
         
 
-        var nextChore = chore(name:name.text!, description:describe.text!, frequency:0, whoTurn:whoChore.text!, ID: "", startDate: Date())
+        var nextChore = chore(name:name.text!, description:describe.text!, frequency:0, whoTurn:whoChore.text!, startDate: Date(), ID: "")
         
         if(name.text! != "" || frequency.text! != "" || whoChore.text! != "" || describe.text! != ""){
             if frequency.text == "daily"{
