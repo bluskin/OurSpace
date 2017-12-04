@@ -42,6 +42,22 @@ class grocViewController2: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         setupTableView()
         ref = Database.database().reference()
+        
+        //bckgrnd code start
+        let bckgrnd = UIImageView(frame: UIScreen.main.bounds)
+        bckgrnd.clipsToBounds = true
+        bckgrnd.contentMode = .scaleAspectFill
+        bckgrnd.image = UIImage(named: "food")
+        bckgrnd.alpha = 0.1
+        self.view.insertSubview(bckgrnd, at: 0)
+        let blck = UIImageView(frame: UIScreen.main.bounds)
+        blck.clipsToBounds = true
+        blck.contentMode = .scaleAspectFill
+        blck.image = UIImage(named: "blck")
+        blck.alpha = 0.1
+        self.view.insertSubview(blck, at: 0)
+        //bckgrnd code end
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -51,6 +67,7 @@ class grocViewController2: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         cell.textLabel?.text = groceries[indexPath.row].item
+        cell.backgroundColor = UIColor.clear
         return cell
         
     }

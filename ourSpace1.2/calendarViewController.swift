@@ -44,6 +44,7 @@ class calendarViewController: UIViewController, UITableViewDelegate, UITableView
 
         let weekDay = events[indexPath.row].weekDay
          cell.detailTextLabel?.text = "\(weekDay) at \(timeDisplay)  duration: \(hours) hours \(minutes) minutes "
+        cell.backgroundColor = UIColor.clear
         return cell
         
     }
@@ -96,6 +97,21 @@ class calendarViewController: UIViewController, UITableViewDelegate, UITableView
         setupTableView()
         roommateCalendar.reloadData()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        //bckgrnd code start
+        let bckgrnd = UIImageView(frame: UIScreen.main.bounds)
+        bckgrnd.clipsToBounds = true
+        bckgrnd.contentMode = .scaleAspectFill
+        bckgrnd.image = UIImage(named: "time")
+        bckgrnd.alpha = 0.1
+        self.view.insertSubview(bckgrnd, at: 0)
+        let blck = UIImageView(frame: UIScreen.main.bounds)
+        blck.clipsToBounds = true
+        blck.contentMode = .scaleAspectFill
+        blck.image = UIImage(named: "blck")
+        blck.alpha = 0.1
+        self.view.insertSubview(blck, at: 0)
+        //bckgrnd code end
     }
     
     override func didReceiveMemoryWarning() {
