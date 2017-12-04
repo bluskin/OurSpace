@@ -16,4 +16,5 @@ struct calEvent{
 //    var min: Int
     var date: Date
     var roommate:String
+    var id: String
 }

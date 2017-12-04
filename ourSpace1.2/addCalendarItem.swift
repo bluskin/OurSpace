@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class addCalendarItem: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     let weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -29,9 +31,20 @@ class addCalendarItem: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
     
     @IBAction func addItem(_ sender: AnyObject) {
         if(newDate != nil){
-        let nextEvent = calEvent(name: eventName.text!, weekDay: weekDay.text!, weakNum: selectedWeekDay, date: newDate!, roommate: roommateName.text!)
-        events.append(nextEvent)
-        print("Event title \(nextEvent.name) Event date \(nextEvent.date.description) ")
+            var nextEvent = calEvent(name: eventName.text!, weekDay: weekDay.text!, weakNum: selectedWeekDay, date: newDate!, roommate: roommateName.text!, id: "")
+            let key = ref.child("calendar").childByAutoId().key
+            nextEvent.id = key
+            let interval = nextEvent.date.timeIntervalSince1970
+            let event = [
+                "name": nextEvent.name,
+                "weekDay": nextEvent.weekDay,
+                "weekNum": nextEvent.weakNum,
+                "date": interval,
+                "roommate": nextEvent.roommate
+            ] as [String : Any]
+            events.append(nextEvent)
+            ref.child("calendar").child(key).setValue(event)
+            print("Event title \(nextEvent.name) Event date \(nextEvent.date.description) ")
         
         print("hello world")
     

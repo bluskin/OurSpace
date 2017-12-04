@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import Firebase
+import FirebaseDatabase
 var events = [calEvent]()
 class calendarViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -79,8 +80,13 @@ class calendarViewController: UIViewController, UITableViewDelegate, UITableView
     //for deleting from favorites list
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete{
-            events.remove(at: indexPath.row)
-            roommateCalendar.reloadData()
+            let deletingEvent = events[indexPath.row]
+            if deletingEvent.roommate == currentUser{
+                events.remove(at: indexPath.row)
+                let id = deletingEvent.id
+                ref.child("calendar").child(id).removeValue()
+                roommateCalendar.reloadData()
+            }
         }
     }
     
