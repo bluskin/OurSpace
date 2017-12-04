@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class addCalendarItem: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     let weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -19,7 +21,10 @@ class addCalendarItem: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
     let datePicker = UIDatePicker()
     
     @IBOutlet weak var eventName: UITextField!
-    @IBOutlet weak var roommateName: UITextField!
+    
+    @IBOutlet weak var dHours: UITextField!
+    @IBOutlet weak var dMinutes: UITextField!
+    
     @IBAction func cancelItem(_ sender: AnyObject) {
         dismiss(animated: true, completion: nil)
     }
@@ -29,9 +34,20 @@ class addCalendarItem: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
     
     @IBAction func addItem(_ sender: AnyObject) {
         if(newDate != nil){
-        let nextEvent = calEvent(name: eventName.text!, weekDay: weekDay.text!, weakNum: selectedWeekDay, date: newDate!, roommate: roommateName.text!)
-        events.append(nextEvent)
-        print("Event title \(nextEvent.name) Event date \(nextEvent.date.description) ")
+            var nextEvent = calEvent(name: eventName.text!, weekDay: weekDay.text!, weakNum: selectedWeekDay, duration: (Int(dHours.text!)!*60 + Int(dMinutes.text!)!) , date: newDate!, roommate: currentUser, id: "")
+            let key = ref.child("calendar").childByAutoId().key
+            nextEvent.id = key
+            let interval = nextEvent.date.timeIntervalSince1970
+            let event = [
+                "name": nextEvent.name,
+                "weekDay": nextEvent.weekDay,
+                "weekNum": nextEvent.weakNum,
+                "date": interval,
+                "roommate": currentUser
+            ] as [String : Any]
+            events.append(nextEvent)
+            ref.child("calendar").child(key).setValue(event)
+            print("Event title \(nextEvent.name) Event date \(nextEvent.date.description) ")
         
         print("hello world")
     
@@ -54,7 +70,7 @@ class addCalendarItem: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
     
     func donePressed(){
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
+        dateFormatter.dateStyle = .none
         dateFormatter.timeStyle = .short
         
         
@@ -66,30 +82,54 @@ class addCalendarItem: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
     }
     
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{
-        return 1
+        return 3
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if(component == 0){
+            return 24
+        }else if(component == 1){
+            return 60
+        }else{
         return weekdays.count
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?{
         self.view.endEditing(true)
-        
-        return weekdays[row]
+        if(component == 0){
+            return "\(row)"
+        }else if(component == 1){
+            return "\(row)"
+        }else{
+            return weekdays[row]
+        }
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int){
-       
-        weekDay.text = weekdays[row]
-        selectedWeekDay = row
+     
+        if(component == 0){
+            dHours.text = "\(row)"
+        }else if(component == 1){
+            dMinutes.text = "\(row)"
+        }else{
+            weekDay.text = weekdays[row]
+            selectedWeekDay = row
+        }
         weekDayPicker.isHidden = true
     }
     func textFieldDidBeginEditing(_ textField: UITextField){
         if(textField == self.weekDay){
             weekDayPicker.isHidden = false
         }
+        if(textField == self.dHours){
+            weekDayPicker.isHidden = false
+        }
+        if(textField == self.dMinutes){
+            weekDayPicker.isHidden = false
+        }
     }
     
-        override func viewDidLoad() {
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         createDatePicker()
         print(events.count)
