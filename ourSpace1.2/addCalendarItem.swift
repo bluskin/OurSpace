@@ -43,7 +43,8 @@ class addCalendarItem: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
                 "weekDay": nextEvent.weekDay,
                 "weekNum": nextEvent.weakNum,
                 "date": interval,
-                "roommate": currentUser
+                "roommate": currentUser,
+                "duration": nextEvent.duration
             ] as [String : Any]
             events.append(nextEvent)
             ref.child("calendar").child(key).setValue(event)
