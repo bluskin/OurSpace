@@ -16,35 +16,6 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var warningView: UIView!
     @IBOutlet weak var warningText: UITextView!
-    
-
-    @IBAction func yesButton(_ sender: AnyObject) {
-        //itemDeleted = true
-        if(taskIdentifer == "delete"){
-        chores.remove(at: deleteIndex)
-        }
-        else{
-            let currentPerson = chores[completeIndex].whoTurn
-            let nextPerson = allRoomates.nextRoomMate(a: currentPerson )
-            chores[completeIndex].whoTurn = nextPerson
-            chores[completeIndex].startDate = Date()
-            choreTable.reloadData()
-            
-        }
-        choreTable.reloadData()
-        warningView.isHidden = true
-    }
-    @IBAction func noButton(_ sender: AnyObject) {
-        warningView.isHidden = true
-    }
-    var itemDeleted = false
-    var choreCompleted = false
-    var deleteIndex = 0
-    var completeIndex = 0
-    var taskIdentifer = "delete"
-
-
-    
     @IBOutlet weak var choreTable: UITableView!
     
     var ref: DatabaseReference!
@@ -58,6 +29,46 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
     }
   
     
+    
+    @IBAction func yesButton(_ sender: AnyObject) {
+        //itemDeleted = true
+        if(taskIdentifer == "delete"){
+            let deletingChore = chores[deleteIndex]
+            chores.remove(at: deleteIndex)
+            ref.child("chores").child(deletingChore.ID).removeValue()
+        }
+        else{
+            let currentPerson = chores[completeIndex].whoTurn
+            let nextPerson = allRoomates.nextRoomMate(a: currentPerson )
+            chores[completeIndex].whoTurn = nextPerson
+            chores[completeIndex].startDate = Date()
+            let changingChore = chores[completeIndex]
+            let id = changingChore.ID
+            let interval =  changingChore.startDate.timeIntervalSince1970
+            let chore = [ "name": changingChore.name,
+                          "description": changingChore.description,
+                          "frequency": changingChore.frequency,
+                          "turn": changingChore.whoTurn,
+                          "startDate": interval
+                ] as [String : Any]
+            //let childUpdates = ["/chores/\(id)": chore]
+            ref.child("chores/\(id)").updateChildValues(["turn": nextPerson, "startDate": interval])
+        }
+        choreTable.reloadData()
+        warningView.isHidden = true
+    }
+    @IBAction func noButton(_ sender: AnyObject) {
+        warningView.isHidden = true
+    }
+    var itemDeleted = false
+    var choreCompleted = false
+    var deleteIndex = 0
+    var completeIndex = 0
+    var taskIdentifer = "delete"
+    
+    
+    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return chores.count
     }
@@ -89,6 +100,7 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
         // update data here
     }
     override func viewDidLoad() {
+        ref = Database.database().reference()
         setupTableView()
         warningText.backgroundColor = UIColor.clear
         choreTable.reloadData()
@@ -112,6 +124,8 @@ class ChoresViewController: UIViewController, UITableViewDataSource, UITableView
         
                 deleteIndex = path.row
                 if(itemDeleted){
+                        let deletingChore = chores[deleteIndex]
+                        ref.child("chores").child(deletingChore.ID).removeValue()
                         chores.remove(at: path.row)
                         choreTable.reloadData()
                     }

@@ -11,7 +11,7 @@ import UIKit
 import FirebaseDatabase
 import Firebase
 
-var groceries = [String]()
+var groceries = [Grocery]()
 class grocViewController2: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
@@ -21,12 +21,12 @@ class grocViewController2: UIViewController, UITableViewDataSource, UITableViewD
 
     @IBAction func addItem(_ sender: AnyObject) {
         if(newItem.text! != ""){
-            groceries.append(newItem.text!)
-            let userID = Auth.auth().currentUser?.uid
-            let groceryItem = ["host": userID,
-                               "item": newItem.text!
+            let groceryItem = ["item": newItem.text!
             ]
-            self.ref.child("groceries").childByAutoId().setValue(groceryItem)
+            let key = ref.child("groceries").childByAutoId().key
+            ref.child("groceries").child(key).setValue(groceryItem)
+            let newGrocery = Grocery(item: newItem.text!, id: key)
+            groceries.append(newGrocery)
             groceryTable.reloadData()
             newItem.text = ""
         }
@@ -50,7 +50,7 @@ class grocViewController2: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        cell.textLabel?.text = groceries[indexPath.row]
+        cell.textLabel?.text = groceries[indexPath.row].item
         return cell
         
     }
@@ -61,6 +61,8 @@ class grocViewController2: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete{
+            let deletingGrocery = groceries[indexPath.row]
+            ref.child("groceries").child(deletingGrocery.id).removeValue()
             groceries.remove(at: indexPath.row)
             groceryTable.reloadData()
         }
