@@ -88,11 +88,6 @@ class calendarViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         setupTableView()
         roommateCalendar.reloadData()
-        print("back in calendar view controller")
-        print("event count is \(events.count)")
-        for item in events{
-            print(" Name: \(item.name)  Roommate: \(item.roommate) index: \(item.weakNum) ")
-        }
         // Do any additional setup after loading the view, typically from a nib.
     }
     
