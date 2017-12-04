@@ -34,7 +34,17 @@ class addCalendarItem: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
     
     @IBAction func addItem(_ sender: AnyObject) {
         if(newDate != nil){
-            var nextEvent = calEvent(name: eventName.text!, weekDay: weekDay.text!, weakNum: selectedWeekDay, duration: (Int(dHours.text!)!*60 + Int(dMinutes.text!)!) , date: newDate!, roommate: currentUser, id: "")
+            var hours = 0
+            var minutes = 0
+            if((dHours.text! != ""))
+            {
+                hours = Int(dHours.text!)!
+                
+            }
+            if((dMinutes.text != "")){
+               minutes = Int(dMinutes.text!)!
+            }
+            var nextEvent = calEvent(name: eventName.text!, weekDay: weekDay.text!, weakNum: selectedWeekDay, duration: (hours*60 + minutes) , date: newDate!, roommate: currentUser, id: "")
             let key = ref.child("calendar").childByAutoId().key
             nextEvent.id = key
             let interval = nextEvent.date.timeIntervalSince1970
@@ -134,6 +144,22 @@ class addCalendarItem: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
         super.viewDidLoad()
         createDatePicker()
         print(events.count)
+        
+        //bckgrnd code start
+        let bckgrnd = UIImageView(frame: UIScreen.main.bounds)
+        bckgrnd.clipsToBounds = true
+        bckgrnd.contentMode = .scaleAspectFill
+        bckgrnd.image = UIImage(named: "time")
+        bckgrnd.alpha = 0.1
+        self.view.insertSubview(bckgrnd, at: 0)
+        let blck = UIImageView(frame: UIScreen.main.bounds)
+        blck.clipsToBounds = true
+        blck.contentMode = .scaleAspectFill
+        blck.image = UIImage(named: "blck")
+        blck.alpha = 0.1
+        self.view.insertSubview(blck, at: 0)
+        //bckgrnd code end
+        
     }
     
     override func didReceiveMemoryWarning() {

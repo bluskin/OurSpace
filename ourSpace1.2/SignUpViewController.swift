@@ -106,6 +106,7 @@ class SignUpViewController: UIViewController {
             if let password = passwordField.text{
                 Auth.auth().createUser(withEmail: email, password: password){ ( user, error) in
                     if let error = error {
+                       // self.equalLabel.lineBreakMode = NSLineBreakMode.byCharWrapping
                         self.equalLabel.text = error.localizedDescription
                         //self.showMessagePrompt(error.localizedDescription)
                         return
