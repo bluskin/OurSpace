@@ -11,6 +11,7 @@ import Foundation
 struct chore {
     var name: String
     var description: String
-    var frequency: String
+    var frequency: Int
     var whoTurn: String
+    var ID: String
 }
