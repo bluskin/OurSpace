@@ -31,16 +31,32 @@ class HomeViewController: UIViewController {
     func retrieveChores(completion: @escaping (Bool) -> ()){
         ref.child("chores").observeSingleEvent(of: .value, with: {(snapshot) in
             if let choresDict = snapshot.value as? [String: AnyObject]{
-            for (id, test) in choresDict{
-                print(test)
-                let name = test["name"]!!
-                let description = test["description"]!!
-                let frequency = test["frequency"]!!
-                let turn = test["turn"]!!
-                let date = test["date"]!!
-                let newChore = chore(name: name as! String, description: description as! String, frequency: frequency as! Int, whoTurn: turn as! String, startDate: date as! Date, ID: id)
-                chores.append(newChore)
+                chores = []
+                for (id, test) in choresDict{
+                    print(test)
+                    let name = test["name"]!!
+                    let description = test["description"]!!
+                    let frequency = test["frequency"]!!
+                    let turn = test["turn"]!!
+                    let interval = test["startDate"]!!
+                    let date = Date(timeIntervalSince1970: interval as! TimeInterval)
+                    let newChore = chore(name: name as! String, description: description as! String, frequency: frequency as! String, whoTurn: turn as! String, startDate: date, ID: id)
+                    chores.append(newChore)
+                }
             }
+            completion(true)
+        })
+        
+    }
+    func retrieveGroceries(completion: @escaping (Bool) -> ()){
+        ref.child("groceries").observeSingleEvent(of: .value, with: {(snapshot) in
+            if let groceriesDict = snapshot.value as? [String: AnyObject]{
+                groceries = []
+                for (id, test) in groceriesDict{
+                    let item = test["item"]!!
+                    let newGrocery = Grocery(item: item as! String, id: id)
+                    groceries.append(newGrocery)
+                }
             }
             completion(true)
         })
@@ -49,8 +65,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         retrieveChores{ success in
             if success{
-                super.viewDidLoad()
-                allRoomates.initialize(allRoomMate: users)
+                self.retrieveGroceries{ success in
+                    if success{
+                        super.viewDidLoad()
+                        allRoomates.initialize(allRoomMate: users)
+                    }
+                }
             }
         
         // Do any additional setup after loading the view, typically from a nib.

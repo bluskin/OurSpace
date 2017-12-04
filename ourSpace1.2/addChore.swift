@@ -30,30 +30,17 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBAction func addChore(_ sender: AnyObject) {
         
 
-        var nextChore = chore(name:name.text!, description:describe.text!, frequency:0, whoTurn:whoChore.text!, startDate: Date(), ID: "")
+        var nextChore = chore(name:name.text!, description:describe.text!, frequency:frequency.text!, whoTurn:whoChore.text!, startDate: Date(), ID: "")
         
-        print (whoChore.text!)
-        
+        let interval =  nextChore.startDate.timeIntervalSince1970
     generateNotification()
         
         if(name.text! != "" || frequency.text! != "" || whoChore.text! != "" || describe.text! != ""){
-            if frequency.text == "daily"{
-                nextChore.frequency = 1
-            }
-            else if(frequency.text == "weekly"){
-                nextChore.frequency = 7
-            }
-            else if(frequency.text == "bi-weekly"){
-                nextChore.frequency = 14
-            }
-            else{
-                nextChore.frequency = 30
-            }
             let chore = [ "name": nextChore.name,
-                          "description": nextChore.description,
-                          "frequency": nextChore.frequency,
-                          "turn": nextChore.whoTurn,
-                         "startDate": nextChore.startDate
+                    "description": nextChore.description,
+                    "frequency": nextChore.frequency,
+                    "turn": nextChore.whoTurn,
+                    "startDate": interval
             ] as [String : Any]
             let key = ref.child("chores").childByAutoId().key
             nextChore.ID = key
