@@ -33,7 +33,10 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         var nextChore = chore(name:name.text!, description:describe.text!, frequency:frequency.text!, whoTurn:whoChore.text!, startDate: Date(), ID: "")
         
         let interval =  nextChore.startDate.timeIntervalSince1970
-    generateNotification()
+        
+        
+        
+        generateNotification()
         
         if(name.text! != "" || frequency.text! != "" || whoChore.text! != "" || describe.text! != ""){
             let chore = [ "name": nextChore.name,
@@ -60,6 +63,11 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     func generateNotification(){
+        
+        
+        if (whoChore.text == currentUser){
+
+        
         let content = UNMutableNotificationContent()
         content.title = whoChore.text! + " has to " + name.text!
         content.body = describe.text!
@@ -68,8 +76,10 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         
         var time = 5
         if (frequency.text! == "daily"){
-            time = 86400
+            time = 30
+            //time = 86400
         }
+            
         if (frequency.text! == "weekly"){
             time = 604800
         }
@@ -84,6 +94,9 @@ class addChore: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(time), repeats: false)
         let request = UNNotificationRequest(identifier: "any", content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            
+            print ("NOTFICIATION TRIGGERED")
+        }
 
     }
 
