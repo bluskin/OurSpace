@@ -28,19 +28,39 @@ class HomeViewController: UIViewController {
     @IBAction func choresViewButton(_ sender: UIButton) {
         self.performSegue(withIdentifier: "ChoresSegue", sender: self)
     }
-    
+    func retrieveChores(completion: @escaping (Bool) -> ()){
+        ref.child("chores").observeSingleEvent(of: .value, with: {(snapshot) in
+            if let choresDict = snapshot.value as? [String: AnyObject]{
+            for (id, test) in choresDict{
+                print(test)
+                let name = test["name"]!!
+                let description = test["description"]!!
+                let frequency = test["frequency"]!!
+                let turn = test["turn"]!!
+                let date = test["date"]!!
+                let newChore = chore(name: name as! String, description: description as! String, frequency: frequency as! Int, whoTurn: turn as! String, startDate: date as! Date, ID: id)
+                chores.append(newChore)
+            }
+            }
+            completion(true)
+        })
+        
+    }
     override func viewDidLoad() {
-        super.viewDidLoad()
-        allRoomates.initialize(allRoomMate: ["Claire", "Nathan" , "David", "Ben"])
-
+        retrieveChores{ success in
+            if success{
+                super.viewDidLoad()
+                allRoomates.initialize(allRoomMate: users)
+            }
+        
         // Do any additional setup after loading the view, typically from a nib.
+        }
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 

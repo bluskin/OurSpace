@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+var users = [String]()
 
 class SignUpViewController: UIViewController {
     
@@ -18,7 +19,6 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var equalLabel: UILabel!
     
     @IBOutlet weak var firstName: UITextField!
-    @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var secondPassword: UITextField!
     var ref: DatabaseReference!
 
@@ -30,7 +30,6 @@ class SignUpViewController: UIViewController {
         // Do any additional setup after loading the view.
         equalLabel.text = ""
         firstName.text = "First Name"
-        lastName.text = "Last Name"
     }
     
     @IBAction func editingEmail(_ sender: Any) {
@@ -53,17 +52,6 @@ class SignUpViewController: UIViewController {
     @IBAction func firstNameEntered(_ sender: Any) {
         if firstName.text == ""{
             firstName.text = "First Name"
-        }
-    }
-    @IBAction func changedLastName(_ sender: Any) {
-        if lastName.text == "Last Name"{
-            lastName.text = ""
-        }
-    }
-    
-    @IBAction func lastNameEntered(_ sender: Any) {
-        if lastName.text == ""{
-            lastName.text = "Last Name"
         }
     }
     @IBAction func editingPassword(_ sender: Any) {
@@ -111,12 +99,10 @@ class SignUpViewController: UIViewController {
                         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
                         let secondView = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController")
                         let userID = Auth.auth().currentUser?.uid
-                        let name = self.firstName.text! + " " + self.lastName.text!
-                        let user = ["host": userID,
-                                           "name": name
-                                           
+                        let name = self.firstName.text!
+                        let user = ["name": name
                         ]
-                        self.ref.child("users").childByAutoId().setValue(user)
+                        self.ref.child("users").child(userID!).setValue(user)
                         self.present(secondView, animated: true, completion: nil)
                     }
                 }

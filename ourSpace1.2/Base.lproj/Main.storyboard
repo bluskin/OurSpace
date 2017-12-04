@@ -146,8 +146,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t18-kp-klg">
+                                <rect key="frame" x="0.0" y="37" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Sign Up" id="Wjp-WU-Ez4">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="eyS-FK-RlY">
+                                            <connections>
+                                                <segue destination="rg9-Li-FO7" kind="show" id="qjv-cl-9dt"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="First Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jEq-3a-iB6">
-                                <rect key="frame" x="45" y="102" width="97" height="30"/>
+                                <rect key="frame" x="133" y="103" width="97" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -157,31 +170,17 @@
                                     <action selector="firstNameEntered:" destination="LKt-kr-BUz" eventType="editingDidEnd" id="sGf-yN-VO8"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Last Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="20t-c4-2dH">
-                                <rect key="frame" x="220" y="102" width="97" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="changedLastName:" destination="LKt-kr-BUz" eventType="editingDidBegin" id="6db-Lv-nIn"/>
-                                    <action selector="changedLastName:" destination="LKt-kr-BUz" eventType="touchUpInside" id="qt2-n9-fN5"/>
-                                    <action selector="lastNameEntered:" destination="LKt-kr-BUz" eventType="editingDidEnd" id="ckc-au-cmg"/>
-                                </connections>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="20t-c4-2dH" firstAttribute="top" secondItem="5ku-dN-nwV" secondAttribute="bottom" constant="82" id="4th-K4-XXQ"/>
                             <constraint firstItem="jEq-3a-iB6" firstAttribute="leading" secondItem="zQc-tk-RP9" secondAttribute="leadingMargin" constant="29" id="gLa-tq-vh3"/>
                             <constraint firstItem="jEq-3a-iB6" firstAttribute="top" secondItem="5ku-dN-nwV" secondAttribute="bottom" constant="82" id="hPF-d0-KYi"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="20t-c4-2dH" secondAttribute="trailing" constant="42" id="rCQ-HF-c2F"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="emailField" destination="qZN-pE-etm" id="cMJ-YP-44r"/>
                         <outlet property="equalLabel" destination="9ns-VJ-DIH" id="BkL-fp-7VO"/>
                         <outlet property="firstName" destination="jEq-3a-iB6" id="9T4-Xf-Phi"/>
-                        <outlet property="lastName" destination="20t-c4-2dH" id="TKy-2s-0wl"/>
                         <outlet property="passwordField" destination="Nhp-dq-aVl" id="qH3-Qx-REl"/>
                         <outlet property="secondPassword" destination="36W-ug-Zuu" id="HtQ-HV-XuP"/>
                     </connections>
@@ -215,7 +214,7 @@
                                 <rect key="frame" x="0.0" y="57" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Title" id="kWE-NL-IPB">
+                                    <navigationItem title="Roommate Calendar" id="kWE-NL-IPB">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="KLB-QO-Wgg">
                                             <connections>
                                                 <segue destination="BYZ-38-t0r" kind="show" id="9We-sZ-7k9"/>
@@ -256,7 +255,7 @@
                                 <rect key="frame" x="0.0" y="67" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Title" id="26H-8n-HcB">
+                                    <navigationItem title="Add Calendar Event" id="26H-8n-HcB">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="8iX-fE-OJV">
                                             <connections>
                                                 <action selector="cancelItem:" destination="coW-nu-FDn" id="lGA-TU-IiV"/>
@@ -278,21 +277,32 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Roommate Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cx2-Je-HKc">
-                                <rect key="frame" x="53" y="240" width="269" height="30"/>
+                                <rect key="frame" x="53" y="226" width="269" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Day of Week" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y3x-VN-s9M">
-                                <rect key="frame" x="53" y="295" width="269" height="30"/>
+                            <pickerView hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uOR-cu-XAX">
+                                <rect key="frame" x="0.0" y="420" width="375" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="coW-nu-FDn" id="FkF-Uv-hfV"/>
+                                    <outlet property="delegate" destination="coW-nu-FDn" id="tVB-4k-xar"/>
+                                </connections>
+                            </pickerView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Weekday" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kdM-9X-WNe">
+                                <rect key="frame" x="53" y="264" width="269" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="coW-nu-FDn" id="oP1-09-uEf"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9vv-dj-aGf">
-                                <rect key="frame" x="53" y="353" width="269" height="30"/>
+                                <rect key="frame" x="53" y="302" width="269" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -305,6 +315,8 @@
                         <outlet property="dateField" destination="9vv-dj-aGf" id="e5s-Dm-fdb"/>
                         <outlet property="eventName" destination="zqK-JE-IVX" id="JEO-QJ-pO6"/>
                         <outlet property="roommateName" destination="Cx2-Je-HKc" id="wWT-pt-fdA"/>
+                        <outlet property="weekDay" destination="kdM-9X-WNe" id="dvX-bO-2wq"/>
+                        <outlet property="weekDayPicker" destination="uOR-cu-XAX" id="aFO-Yg-goP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D55-VO-ZyT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -605,7 +617,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="UhI-zY-uIF"/>
         <segue reference="lhB-lP-94C"/>
+        <segue reference="9We-sZ-7k9"/>
     </inferredMetricsTieBreakers>
 </document>

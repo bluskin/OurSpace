@@ -23,17 +23,7 @@ class grocViewController2: UIViewController, UITableViewDataSource, UITableViewD
         if(newItem.text! != ""){
             groceries.append(newItem.text!)
             let userID = Auth.auth().currentUser?.uid
-            var name = ""
-            self.ref.child("users").child(userID!).observeSingleEvent(of: .value, with: {
-                (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                let username = value?["name"] as? String ?? ""
-                name = username
-            })
-            { (error) in
-                print(error.localizedDescription)
-            }
-            let groceryItem = ["host": name,
+            let groceryItem = ["host": userID,
                                "item": newItem.text!
             ]
             self.ref.child("groceries").childByAutoId().setValue(groceryItem)

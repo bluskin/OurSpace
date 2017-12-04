@@ -8,6 +8,9 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
+var currentUser:String = ""
+var ref: DatabaseReference!
 
 class LoginViewController: UIViewController {
     
@@ -17,6 +20,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        ref = Database.database().reference()
+
     }
 
     @IBAction func editingEmail(_ sender: Any) {
@@ -55,15 +60,39 @@ class LoginViewController: UIViewController {
                         return
                     }
                     else{
-                        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-                        let secondView = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController")
-                        self.present(secondView, animated: true, completion: nil)
+                        print("users")
+                        self.retrieveUsers{ success in
+                            if success{
+                                let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                                let secondView = mainStoryboard.instantiateViewController(withIdentifier: "HomeViewController")
+                                self.present(secondView, animated: true, completion: nil)
 
+                            }
+                            else{
+                                print("failed")
+                            }
+                        }
                     }
                 }
             }
         }
     }
+    func retrieveUsers(completion: @escaping (Bool) -> ()){
+        let userID = Auth.auth().currentUser?.uid
+        ref.child("users").observeSingleEvent(of: .value, with: {(snapshot) in
+            let usersDict = snapshot.value as! [String: AnyObject]
+            for (id, test) in usersDict{
+                let name = test["name"]
+                users.append(name!! as! String)
+                if(id == userID!){
+                    currentUser = name!! as! String
+                }
+            }
+            completion(true)
+        })
+
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
