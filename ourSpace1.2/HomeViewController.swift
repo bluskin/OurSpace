@@ -62,7 +62,7 @@ class HomeViewController: UIViewController {
                         var time = 5
                         if (newChore.frequency == "daily"){
                             //time = Int(86400.0 - difference)
-                            time = Int(86400.0 - difference)
+                            time = Int(30.0 - difference)
                             print ("CHORE CHANGED")
                             print (difference)
                             print (time)
