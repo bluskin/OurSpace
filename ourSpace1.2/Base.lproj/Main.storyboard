@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rg9-Li-FO7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G1036" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rg9-Li-FO7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -276,12 +276,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Roommate Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cx2-Je-HKc">
-                                <rect key="frame" x="53" y="226" width="269" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Duration: Hours" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cx2-Je-HKc">
+                                <rect key="frame" x="53" y="226" width="118" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="coW-nu-FDn" id="8bC-bK-g9V"/>
+                                </connections>
                             </textField>
                             <pickerView hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uOR-cu-XAX">
                                 <rect key="frame" x="0.0" y="420" width="375" height="216"/>
@@ -308,13 +311,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Duration: Minutes" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vfr-UJ-zRh">
+                                <rect key="frame" x="204" y="226" width="118" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="coW-nu-FDn" id="fJD-OP-ETH"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="dHours" destination="Cx2-Je-HKc" id="kPC-ia-YXK"/>
+                        <outlet property="dMinutes" destination="vfr-UJ-zRh" id="KAB-ow-yry"/>
                         <outlet property="dateField" destination="9vv-dj-aGf" id="e5s-Dm-fdb"/>
                         <outlet property="eventName" destination="zqK-JE-IVX" id="JEO-QJ-pO6"/>
-                        <outlet property="roommateName" destination="Cx2-Je-HKc" id="wWT-pt-fdA"/>
                         <outlet property="weekDay" destination="kdM-9X-WNe" id="dvX-bO-2wq"/>
                         <outlet property="weekDayPicker" destination="uOR-cu-XAX" id="aFO-Yg-goP"/>
                     </connections>
@@ -500,7 +514,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.8961374889" green="0.92738089800000001" blue="1" alpha="0.74654858732876717" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.8961374889" green="0.92738089800000001" blue="1" alpha="0.85249892979452058" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FJy-a7-Wzg">
                                 <rect key="frame" x="289" y="28" width="77" height="30"/>
@@ -617,7 +631,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="2YD-A1-MKY"/>
         <segue reference="lhB-lP-94C"/>
-        <segue reference="9We-sZ-7k9"/>
     </inferredMetricsTieBreakers>
 </document>

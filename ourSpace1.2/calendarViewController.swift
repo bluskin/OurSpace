@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import Firebase
+import FirebaseDatabase
 var events = [calEvent]()
 class calendarViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -33,15 +34,16 @@ class calendarViewController: UIViewController, UITableViewDelegate, UITableView
     
         dateFormatter.timeStyle = .short
         
-        
+        let fullMinutes = events[indexPath.row].duration
+        let hours = (fullMinutes / 60)
+        let minutes = (fullMinutes % 60)
         
         let timeDisplay = dateFormatter.string(from: date)
         
-        let hour = calendar.component(.hour, from: date)
-        let minute = calendar.component(.minute, from: date)
+      
 
         let weekDay = events[indexPath.row].weekDay
-         cell.detailTextLabel?.text = "\(weekDay) at \(timeDisplay)"
+         cell.detailTextLabel?.text = "\(weekDay) at \(timeDisplay)  duration: \(hours) hours \(minutes) minutes "
         return cell
         
     }
@@ -79,8 +81,13 @@ class calendarViewController: UIViewController, UITableViewDelegate, UITableView
     //for deleting from favorites list
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete{
-            events.remove(at: indexPath.row)
-            roommateCalendar.reloadData()
+            let deletingEvent = events[indexPath.row]
+            if deletingEvent.roommate == currentUser{
+                events.remove(at: indexPath.row)
+                let id = deletingEvent.id
+                ref.child("calendar").child(id).removeValue()
+                roommateCalendar.reloadData()
+            }
         }
     }
     
