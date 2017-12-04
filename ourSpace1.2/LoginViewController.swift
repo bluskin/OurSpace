@@ -16,13 +16,32 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+  
+  
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         ref = Database.database().reference()
-
+        
+        //bckgrnd code start
+        let bckgrnd = UIImageView(frame: UIScreen.main.bounds)
+        bckgrnd.clipsToBounds = true
+        bckgrnd.contentMode = .scaleAspectFill
+        bckgrnd.image = UIImage(named: "washu")
+        bckgrnd.alpha = 0.2
+        self.view.insertSubview(bckgrnd, at: 0)
+        let blck = UIImageView(frame: UIScreen.main.bounds)
+        blck.clipsToBounds = true
+        blck.contentMode = .scaleAspectFill
+        blck.image = UIImage(named: "blck")
+        blck.alpha = 0.9
+       self.view.insertSubview(blck, at: 0)
+        //bckgrnd code end
     }
+    
+   
 
     @IBAction func editingEmail(_ sender: Any) {
         if emailField.text == "Email"{
